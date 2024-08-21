@@ -46,12 +46,13 @@ class DroneManager(object):
     def stop(self):
         self.stop_even.set()
         retry = 0
-        while self._response_thread.isAlive():
+        while self._response_thread.is_alive():
             time.sleep(0.3)
             if retry > 30:
                 break
             retry += 1
         self.socket.close()
+
 
     def send_command(self, command):
         logger.info({'action': 'send_command', 'command': command})
